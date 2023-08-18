@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{%load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+            crossorigin="anonymous"></script>
+    <title>Flash Card</title>
+</head>
+<body class="text-center">
+<header>
+    <div>
+        <span><a href="{% url 'home' %}">Home</a></span>
+        <span><a href="{% url 'login' %}">로그인</a></span>
+        <span><a href="/trains/">단어 연습</a></span>
+        <span><a href="/exams/">단어 테스트</a></span>
+        <span><a href="/words/">단어 입력</a></span>
+    </div>
+</header>
+<main>
+    {%block content%}
+    {%endblock content%}
+</main>
+</body>
+</html>
