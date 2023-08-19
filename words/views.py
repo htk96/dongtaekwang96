@@ -1,5 +1,4 @@
 from django.core.paginator import Paginator
-from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
 
@@ -18,7 +17,7 @@ class WordList(View):
         return render(request, 'words/word_list.html', context)
 
     def post(self, request):
-        return HttpResponse('<h1> Words Index Page POST</h1')
+        return render(request, 'words/word_test.html', {'word_test_message': 'Post Error'})
 
 
 class WordInput(View):
@@ -38,17 +37,27 @@ class WordInput(View):
         find_word_dict = daum_dict.get_word_dict()
 
         show_word_list = ''
-
-        for index, word in enumerate(input_word_list):
-            if index == 0:
-                show_word_list += f'<b>[{word}]</b>'
-                if index < len(input_word_list) - 1:
-                    show_word_list += ", "
-            elif index < len(input_word_list) - 1:
-                show_word_list += f'{word}, '
-            else:
-                show_word_list += f'{word}'
+        if find_word_dict['is_success']:
+            for index, word in enumerate(input_word_list):
+                if index == 0:
+                    show_word_list += f'<b>[{word}]</b>'
+                    if index < len(input_word_list) - 1:
+                        show_word_list += ", "
+                elif index < len(input_word_list) - 1:
+                    show_word_list += f'{word}, '
+                else:
+                    show_word_list += f'{word}'
+        else:
+            show_word_list = '검색 실패'
 
         context = {'show_word_list': show_word_list, 'input_word_list': input_word_list, 'find_word_num': 0,
                    'find_word_dict': find_word_dict}
         return render(request, 'words/word_find.html', context)
+
+
+class WordSave(View):
+    def get(self):
+        pass
+
+    def post(self):
+        pass
