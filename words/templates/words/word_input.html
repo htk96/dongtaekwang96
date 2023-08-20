@@ -18,7 +18,6 @@
   </form>
 </div>
 
-
 <script>
   // 입력 필드에 영어와 공백, 컴마, 엔터만 입력되도록 검사하는 JavaScript 코드
   const inputField = document.getElementById('input_word');
@@ -26,6 +25,7 @@
   inputField.addEventListener('input', function() {
     this.value = this.value.replace(/[^a-zA-Z, \n]/g, ''); // 영어 알파벳, 공백, 컴마, 엔터만 허용
   });
+
 </script>
 
 {% endblock content %}

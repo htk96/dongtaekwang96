@@ -12,20 +12,26 @@
         <th scope="col" class="text-center">단어뜻1</th>
         <th scope="col" class="text-center">단어뜻2</th>
         <th scope="col" class="text-center">로마자</th>
-        <th scope="col" class="text-center">작성일</th>
+        <th scope="col" class="text-center">삭제</th>
     </tr>
     </thead>
     {% for word in word_list %}
     <tr>
         <td scope="col" class="text-center"><span>{{ word.id }}</span></td>
-        <td scope="col" class="text-center"><span>{{ word.en_word }}</span></td>
+        <td scope="col" class="text-center"><a href="{% url 'word-edit' word.id %}"><span>{{ word.en_word }}</span></a></td>
         <td scope="col" class="text-center"><span>[{{ word.en_phonetic }}]</span></td>
         <td scope="col" class="text-center"><span>({{word.word_class}})</span></td>
         <td scope="col" class="text-center"><span>{{ word.ko_phonetic }}</span></td>
         <td scope="col" class="text-center"><span>{{ word.ko_word_1 }}</span></td>
         <td scope="col" class="text-center"><span>{{ word.ko_word_2 }}</span></td>
         <td scope="col" class="text-center"><span>[{{ word.ko_romanize }}]</span></td>
-        <td scope="col" class="text-center"><span>{{ word.reg_date }}</span></td>
+        <td scope="col" class="text-center">
+            <form action="{% url 'words' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="word_id" value="{{ word.id }}">
+                <button type="submit" class="btn btn-danger btn-sm">del</button>
+            </form>
+        </td>
     </tr>
     {% endfor %}
 </table>
