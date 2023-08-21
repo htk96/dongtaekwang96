@@ -12,7 +12,7 @@
   <form class="form-inline" action="{% url 'word-input' %}" method="post">
     {% csrf_token %}
     <div class="form-group mb-2">
-      <textarea class="form-control" name="input_word" id="input_word" rows="10" placeholder="영어단어를 입력하세요"></textarea>
+      <textarea class="form-control" name="input_word" id="input_word" rows="10" placeholder="여러 단어 입력시 , 로 구분해 주세요. [ex : welcome, flash, card]"></textarea>
     </div>
     <button type="submit" class="btn btn-primary mt-3">단어 검색</button>
   </form>

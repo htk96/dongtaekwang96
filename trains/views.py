@@ -22,6 +22,12 @@ class TrainsIndex(LoginRequiredMixin, View):
     def post(self, request):
         user = request.user
 
+        user_find_hint = request.POST.get('user_find_hint')
+        config = Config()
+        config.user_find_hint = user_find_hint
+        config.id_user = user
+        config.save()
+
         train_word_count = request.POST.get('train_word_count')
         train_repeat = request.POST.get('train_repeat')
         train_seconds = request.POST.get('train_seconds')
