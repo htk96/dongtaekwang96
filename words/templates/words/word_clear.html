@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .custom-border {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 20px;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card my-4">
+                <div class="card-header text-center">
+                    <h4><b>단 어 전 체 삭 제</b></h4>
+                </div>
+                <div class="card-body">
+                    <form class="form-inline" action="{% url 'word-clear' %}" method="post">
+                        {% csrf_token %}
+                        <div class="row mt-3 mb-3">
+                            <input type="password" name="clear_password" placeholder="비밀번호를 입력하세요"  class="form-control  ml-5 mr-5 ">
+                        </div>
+                        <div class="text-center">
+                        <button type="submit" class="btn btn-primary mt-3">확 인</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 입력 필드에 영어와 공백, 컴마, 엔터만 입력되도록 검사하는 JavaScript 코드
+    const inputField = document.getElementById('input_word');
+
+    inputField.addEventListener('input', function() {
+      this.value = this.value.replace(/[^a-zA-Z, \n]/g, ''); // 영어 알파벳, 공백, 컴마, 엔터만 허용
+    });
+
+</script>
+
+{% endblock content %}
