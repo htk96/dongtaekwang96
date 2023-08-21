@@ -10,8 +10,9 @@
                 <div class="card-body">
                     <form class="form-inline" action="{% url 'word-clear' %}" method="post">
                         {% csrf_token %}
-                        <div class="row mt-3 mb-3">
-                            <input type="password" name="clear_password" placeholder="비밀번호를 입력하세요"  class="form-control  ml-5 mr-5 ">
+                        <div class="row mt-3 mb-3 text-center">
+                            <input type="password" name="clear_password" placeholder="비밀번호를 입력하세요"
+                                   class="form-control  ml-5 mr-5" style="width: 50%; margin: 0 auto;">
                         </div>
                         <div class="text-center">
                         <button type="submit" class="btn btn-primary mt-3">확 인</button>
