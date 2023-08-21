@@ -1,5 +1,6 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator
+from django.db import connection
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 
@@ -106,6 +107,23 @@ class WordEdit(View):
         word.save()
 
         return redirect('words')
+
+
+class WordClear(View):
+
+    def get(self, request):
+        return render(request, 'words/word_clear.html')
+
+    def post(self, request):
+        clear_password = 'qwer1234'
+        get_password = request.POST.get('clear_password')
+        if clear_password == get_password:
+            Word.objects.all().delete()
+            with connection.cursor() as cursor:
+                cursor.execute("DELETE FROM sqlite_sequence WHERE name = 'words_word'")
+            return redirect('words')  # Redirect to the desired URL
+        else:
+            return WordUtil.get_system_message_render(request, "비밀번호 오류 ", 'words')
 
 
 class WordUtil:
