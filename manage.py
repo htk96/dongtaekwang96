@@ -4,6 +4,9 @@ import os
 import sys
 
 
+# python manage.py makemigrations
+# python manage.py migrate
+
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'flash_card.settings')
