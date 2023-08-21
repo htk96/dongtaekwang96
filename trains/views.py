@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from django.views import View
 
-from trains.models import Train
+from users.models import Config
 
 
 # Create your views here.
@@ -13,34 +13,33 @@ class TrainsIndex(LoginRequiredMixin, View):
     def get(self, request):
         user = request.user
         try:
-            train = Train.objects.get(id_user=user.id)
+            config = Config.objects.get(id_user=user.id)
         except ObjectDoesNotExist:
-            train = Train()
-        context = {'train': train}
+            config = Config()
+        context = {'config': config}
         return render(request, 'trains/trains_setting.html', context)
 
     def post(self, request):
         user = request.user
 
-        train_word_range = request.POST.get('train_word_range')
         train_word_count = request.POST.get('train_word_count')
         train_repeat = request.POST.get('train_repeat')
         train_seconds = request.POST.get('train_seconds')
         train_tts_play = request.POST.get('train_tts_play')
-        train_data_dict = {
+        config_data_dict = {
             'train_word_count': train_word_count,
             'train_repeat': train_repeat,
             'train_seconds': train_seconds,
             'train_tts_play': train_tts_play,
         }
-        print(train_data_dict)
+        print(config_data_dict)
         try:
-            train = Train.objects.get(id_user=user.id)
-            TrainsUtil.train_save(train, train_data_dict)
+            config = Config.objects.get(id_user=user.id)
+            TrainsUtil.config_save(config, config_data_dict)
         except ObjectDoesNotExist:
-            train = Train()
-            train.id_user = user
-            TrainsUtil.train_save(train, train_data_dict)
+            config = Config()
+            config.id_user = user
+            TrainsUtil.config_save(config, config_data_dict)
 
         return render(request, 'trains/trains_start.html')
 
@@ -55,9 +54,9 @@ class TrainsStart(View):
 
 class TrainsUtil:
     @staticmethod
-    def train_save(train: Train, train_data_dict):
-        train.train_word_count = train_data_dict['train_word_count']
-        train.train_repeat = train_data_dict['train_repeat']
-        train.train_seconds = train_data_dict['train_seconds']
-        train.train_tts_play = train_data_dict['train_tts_play']
-        train.save()
+    def config_save(config: Config, config_data_dict):
+        config.train_word_count = config_data_dict['train_word_count']
+        config.train_repeat = config_data_dict['train_repeat']
+        config.train_seconds = config_data_dict['train_seconds']
+        config.train_tts_play = config_data_dict['train_tts_play']
+        config.save()

@@ -10,18 +10,12 @@
                 <div class="card-body">
                     <form class="form-inline" action="{% url 'trains-setting' %}" method="post">
                         {% csrf_token %}
-                        <div class="row mb-3">
-                            <label for="train_word_range" class="col-sm-3 col-form-label">연습 단어 범위</label>
-                            <div class="col-sm-9">
-                                <input type="text" id="train_word_range" name="train_word_range"
-                                       class="form-control" placeholder="단어 범위를 입력해 주세요 (전체, 1-100)" required>
-                            </div>
-                        </div>
+
                         <div class="row mb-3">
                             <label for="train_word_count" class="col-sm-3 col-form-label">연습 단어 갯수</label>
                             <div class="col-sm-9">
                                 <input type="text" id="train_word_count" name="train_word_count"
-                                       value="{{ train.train_word_count }}"
+                                       value="{{ config.train_word_count }}"
                                        class="form-control" placeholder="단어 갯수을 입력하세요(단어 범위 보다 작으면 랜덤 선택 됩니다.)"
                                        required>
                             </div>
@@ -31,7 +25,7 @@
                             <label for="train_repeat" class="col-sm-3 col-form-label">반복 횟수</label>
                             <div class="col-sm-9">
                                 <input type="text" id="train_repeat" name="train_repeat"
-                                       value="{{ train.train_repeat }}"
+                                       value="{{ config.train_repeat }}"
                                        class="form-control" placeholder="반복 횟수를 입력하세요"
                                        required>
                             </div>
@@ -41,7 +35,7 @@
                             <label for="train_seconds" class="col-sm-3 col-form-label">노출 시간</label>
                             <div class="col-sm-9">
                                 <input type="text" id="train_seconds" name="train_seconds"
-                                       value="{{ train.train_seconds }}" class="form-control"
+                                       value="{{ config.train_seconds }}" class="form-control"
                                        placeholder="단어가 보여 지는 시간을 입력하세요(단위:초)" required>
                             </div>
                         </div>
@@ -53,11 +47,11 @@
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                     <label class="btn btn-light active">
                                         <input type="radio" name="train_tts_play" value="True"
-                                               {% if train.train_tts_play %}checked{% endif %}> 음성 재생
+                                               {% if config.train_tts_play %}checked{% endif %}> 음성 재생
                                     </label>
                                     <label class="btn btn-light">
                                         <input type="radio" name="train_tts_play" value="False"
-                                               {% if not train.train_tts_play %}checked{% endif %}> 음성 재생 안 함
+                                               {% if not config.train_tts_play %}checked{% endif %}> 음성 재생 안 함
                                     </label>
                                 </div>
                             </div>

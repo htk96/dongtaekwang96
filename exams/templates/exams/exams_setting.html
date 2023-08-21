@@ -10,18 +10,12 @@
                 <div class="card-body">
                     <form class="form-inline" action="{% url 'exam-setting' %}" method="post">
                         {% csrf_token %}
-                        <div class="row mb-3">
-                            <label for="train_word_range" class="col-sm-3 col-form-label">TEST 단어 범위</label>
-                            <div class="col-sm-9">
-                                <input type="text" id="train_word_range" name="train_word_range"
-                                       class="form-control" placeholder="단어 범위를 입력해 주세요 (전체, 1-100)" required>
-                            </div>
-                        </div>
+
                         <div class="row mb-3">
                             <label for="exam_word_count" class="col-sm-3 col-form-label">TEST 단어 갯수</label>
                             <div class="col-sm-9">
                                 <input type="text" id="exam_word_count" name="exam_word_count"
-                                       value="{{ train.exam_word_count }}"
+                                       value="{{ config.exam_word_count }}"
                                        class="form-control" placeholder="단어 갯수을 입력하세요(단어 범위 보다 작으면 랜덤 선택 됩니다.)"
                                        required>
                             </div>
@@ -31,7 +25,7 @@
                             <label for="exam_seconds" class="col-sm-3 col-form-label">노출 시간</label>
                             <div class="col-sm-9">
                                 <input type="text" id="exam_seconds" name="exam_seconds"
-                                       value="{{ train.exam_seconds }}" class="form-control"
+                                       value="{{ config.exam_seconds }}" class="form-control"
                                        placeholder="단어가 보여 지는 시간을 입력하세요(단위:초)" required>
                             </div>
                         </div>
@@ -42,7 +36,7 @@
 <!--                            <label for="exam_difficulty" class="col-sm-3 col-form-label">TEST 레벨</label>-->
 <!--                            <div class="col-sm-9">-->
 <!--                                <input type="text" id="exam_difficulty" name="exam_difficulty"-->
-<!--                                       value="{{ train.exam_difficulty }}"-->
+<!--                                       value="{{ config.exam_difficulty }}"-->
 <!--                                       class="form-control" placeholder="TEST 레벨은 준비중 입니다."-->
 <!--                                       required>-->
 <!--                            </div>-->
@@ -54,11 +48,11 @@
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                     <label class="btn btn-light active">
                                         <input type="radio" name="exam_tts_play" value="True"
-                                               {% if train.exam_tts_play %}checked{% endif %}> 음성 재생
+                                               {% if config.exam_tts_play %}checked{% endif %}> 음성 재생
                                     </label>
                                     <label class="btn btn-light">
                                         <input type="radio" name="exam_tts_play" value="False"
-                                               {% if not train.exam_tts_play %}checked{% endif %}> 음성 재생 안 함
+                                               {% if not config.exam_tts_play %}checked{% endif %}> 음성 재생 안 함
                                     </label>
                                 </div>
                             </div>
