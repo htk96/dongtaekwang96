@@ -59,7 +59,7 @@ class WordInput(View):
 
 class WordSave(View):
     def get(self, request):
-        return WordUtil.get_system_message_render(request, "페이지는 접근 오류 ", 'word-input')
+        return WordUtil.get_system_message_render(request, "페이지 접근 오류 ", 'word-input')
 
     def post(self, request):
         word = WordUtil.get_word(request)
