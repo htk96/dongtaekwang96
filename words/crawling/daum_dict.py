@@ -140,6 +140,11 @@ class DaumDict:
         return word
 
 
+
+
+
+
+
 if __name__ == '__main__':
     daum_dict = DaumDict("good")
     if daum_dict.is_get_detail_page():

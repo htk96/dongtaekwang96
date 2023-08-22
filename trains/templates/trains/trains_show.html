@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card my-4">
+                <div class="card-header text-center">
+                    <h4><b>단 어 연 습 {{show_num}}</b></h4>
+                </div>
+
+                <div class="container mt-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <DIV class="row">
+                                <div class="text-center"><h1>{{ train_word.en_word }}</h1></div>
+                                <div class="text-center"><h3>{{ train_word.en_phonetic }}</h3></div>
+                                <div class="text-center"><h3>{{ train_word.word_class }}
+                                    - {{ train_word.ko_phonetic }}</h3></div>
+                                <div class="text-center"><h1>{{ train_word.ko_word_1 }}</h1></div>
+                                <div class="text-center"><h3>{{ train_word.ko_word_2 }}</h3></div>
+                                <div class="text-center"><h3>{{ train_word.ko_romanize }}</h3></div>
+                            </DIV>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card-body">
+                    <form class="form-inline" action="{% url 'trains-show' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="show_num" value="{{show_num}}">
+
+                        <div class="row mb-3">
+                            <label for="train_word_count" class="col-sm-3 col-form-label">영어단어</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="train_word_count" name="train_word_count"
+                                       value="{{ config.train_word_count }}"
+                                       class="form-control" placeholder="영어 단어 ({{ train_word.en_word }}) 를 입력하세요"
+                                       required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="train_repeat" class="col-sm-3 col-form-label">단어뜻 1</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="train_repeat" name="train_repeat"
+                                       value="{{ config.train_repeat }}"
+                                       class="form-control" placeholder="첫번째 단어뜻 ({{ train_word.ko_word_1 }}) 을 입력하세요"
+                                       required>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary mt-3">확 인</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
