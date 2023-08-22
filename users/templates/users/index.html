@@ -1,8 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Flash Card Index Html</h1>
-<div class="text-center mt-4">
-    <a href="{% url 'login' %}" class="btn btn-primary">로그인</a>
+<div class="container mt-5">
+    <h1>Welcome to the Flash Card Index Page</h1>
+    <div class="text-center mt-4">
+        {% if user.is_authenticated %}
+        <p>You are logged in as {{ user.username }}.</p>
+        <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+        {% else %}
+        <p>You are not logged in.</p>
+        <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+        {% endif %}
+    </div>
 </div>
 {% endblock content %}
