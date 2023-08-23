@@ -5,6 +5,10 @@ from .forms import LoginForm, RegisterForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import SetPasswordForm
 
+#회원가입 비밀번호 조건 안맞을 시 표시
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
+
 
 
 def sign_in(request):
@@ -39,6 +43,15 @@ def register(request):
         if form.is_valid():  # 폼이 유효한지 확인
             user = form.save(commit=False)  # 폼을 기반으로 User 모델 인스턴스 생성 (아직 저장하지 않음)
             user.username = user.username.lower()  # 사용자명을 소문자로 변환하여 저장
+            #비밀번호 검증 추가
+            password = form.cleaned_data.get('password1')
+            try:
+                validate_password(password, user=user)
+            except ValidationError as error:
+                form.add_error('password1', error)
+                return render(request, 'users/register.html', {'form': form})
+            user.set_password(password)
+            #
             user.save()  # 사용자 정보 저장
             messages.success(request, f"Signup Success")
             return redirect('login')  # 회원가입 성공 시 로그인 페이지로 리다이렉트

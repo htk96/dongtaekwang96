@@ -9,7 +9,7 @@ urlpatterns = [
     path("Word_Test_History/", views.Word_Test_History, name="Word_Test_History"),
     path("Word_Test_Score/", views.Word_Test_Score, name="Word_Test_Score"),
 
-    #위쪽에 html삭제완료, 회원탈퇴path추가
+    #회원탈퇴path추가
     path('delete_account/', views.delete_account, name='delete_account'),
 
     # 용석 작업 - 기존 작업 유지 하고 추가 작업 합니다. - 나중에 확인 하세요.

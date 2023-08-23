@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 
 from users.models import Config
@@ -14,11 +14,13 @@ from django.http import HttpResponse
 def delete_account(request):
     if request.method == 'POST':
         confirmation = request.POST.get('confirmation')
+        withdrawal_button_value = request.POST.get('withdrawal_Button')  # 버튼의 입력값 받아오기
         if confirmation == '회원탈퇴':
             request.user.delete()  # 회원 삭제
             logout(request)  # 로그아웃 처리
-            return redirect('index')  # 탈퇴 후 홈페이지로 이동
-    return HttpResponse('탈퇴 요청이 잘못되었습니다.')
+        else:
+            return HttpResponse(f'탈퇴 요청이 잘못되었습니다. <br>"{withdrawal_button_value}"로 입력함<br>')
+    return HttpResponse('잘못된 요청입니다.')
 
 class ExamsSetting(LoginRequiredMixin, View):
     #      LoginRequiredMixin 로그인 되어 있는지 확인하고 안되어 있으면 러그린 화면으로 가는 class
